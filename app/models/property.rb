@@ -6,4 +6,7 @@ class Property < ApplicationRecord
     validates :city, presence: true
     validates :state, presence: true
     validates :zip_code, presence: true
+
+    ZIP_CODE_REGEX = /\A\d{5}(-\d{4})?\z/
+    validates :zip_code, format: { with: ZIP_CODE_REGEX }
 end
