@@ -32,6 +32,14 @@ class Api::V1::PropertiesController < ApplicationController
     head :no_content
   end
 
+  def search
+    # Perform the search based on the query parameters
+    properties = Property.where("name LIKE ?", "%#{params[:q]}%")
+
+    # Return the results as JSON
+    render json: properties
+  end
+
   private
 
   def set_property
