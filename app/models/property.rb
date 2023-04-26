@@ -9,4 +9,9 @@ class Property < ApplicationRecord
 
     ZIP_CODE_REGEX = /\A\d{5}(-\d{4})?\z/
     validates :zip_code, format: { with: ZIP_CODE_REGEX }
+
+    MAX_PRICE = 1000000000
+    validates :price, numericality: { less_than_or_equal_to: MAX_PRICE }  
+
+    validates :bedrooms, numericality: { only_integer: true }
 end
