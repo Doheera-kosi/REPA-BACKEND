@@ -1,6 +1,18 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
+  def login
+    user = User.find_by(email: params[:email])
+
+    if user && user.authenticate(params[:password])
+      token = JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base)
+
+      render json: { token }
+    else
+      render json: { error: 'Invalid email or password' }, status: :unauthorized
+    end
+  end
+
   def index
     @users = User.all
     render json: @users
