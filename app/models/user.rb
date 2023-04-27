@@ -8,4 +8,7 @@ class User < ApplicationRecord
       false
     end
   end
+
+  # Ensure that email addresses are unique
+  validates :email, presence: true, uniqueness: true
 end
