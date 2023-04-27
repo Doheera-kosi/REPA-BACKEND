@@ -8,5 +8,5 @@ class Api::V1::SessionsController < ApplicationController
     rescue StandardError => e
       render json: { error: e.message }, status: :unauthorized
     end
-  end
+end
   
