@@ -16,14 +16,16 @@ module Api
       end
 
       def create
+        listing = Listing.find(params[:listing_id])
         property = Property.new(property_params)
-
+        property.listing = listing
+      
         if property.save
           render json: property, status: :created
         else
           render json: { error: property.errors.full_messages }, status: :unprocessable_entity
         end
-      end
+      end      
 
       def update
         property = Property.find(params[:id])
