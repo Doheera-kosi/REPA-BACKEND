@@ -1,4 +1,7 @@
 class Property < ApplicationRecord
+    belongs_to :listing
+    validates :listing_id, presence: true
+    
     validates :title, presence: true
     validates :description, presence: true
     validates :price, presence: true, numericality: { greater_than: 0 }
